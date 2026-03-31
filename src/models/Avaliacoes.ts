@@ -1,4 +1,4 @@
-export interface Avalicacoes {
+export interface Avaliacoes {
     id?: number;
     comentario: string;
     nota: number;

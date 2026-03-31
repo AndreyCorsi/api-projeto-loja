@@ -6,6 +6,9 @@ import { FaqController } from "./controllers/FaqController";
 import { PedidoController } from "./controllers/PedidoController";
 import { MovimentoestoqueController } from "./controllers/MovimentoestoqueController";
 import { FuncionarioController } from "./controllers/FuncionarioController";
+import { Categoria_roupaController } from "./controllers/Categoria_roupaController";
+import { Categoria_clienteController } from "./controllers/Categoria_clienteController";
+import { AvaliacoesController } from "./controllers/AvaliacoesController";
 
 
 
@@ -21,6 +24,9 @@ FaqController();
 PedidoController();
 MovimentoestoqueController();
 FuncionarioController();
+Categoria_roupaController();
+Categoria_clienteController();
+AvaliacoesController();
 
 app.listen(3000, () => {
     console.log("Servidor rodando em http://localhost:3000");
