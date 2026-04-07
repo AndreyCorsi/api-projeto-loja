@@ -4,7 +4,7 @@ import { Categoria_roupa } from "../models/Categoria_roupa";
 export class Categoria_roupaRepository {
     salvar(c: Categoria_roupa): Categoria_roupa {
         const resultado = db
-            .prepare('INSERT INTO categoria_roupa (nome) VALUES (?, ?)')
+            .prepare('INSERT INTO categoria_roupa (nome, descricao) VALUES (?, ?)')
             .run(c.nome, c.descricao );
 
         return { id: Number(resultado.lastInsertRowid), nome: c.nome, descricao: c.descricao };

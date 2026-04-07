@@ -1,4 +1,6 @@
-# ─── CLIENTES ────────────────────────────────────────────────────────────────
+# =========================
+# CLIENTES
+# =========================
 
 ### Criar cliente
 POST http://localhost:3000/clientes
@@ -16,39 +18,69 @@ Content-Type: application/json
   "data_nasc": "2000-01-01",
   "id_categoria_cliente": 1
 }
-
 ###
 
-### Listar todos os clientes
+### Listar clientes
 GET http://localhost:3000/clientes
 
 ###
 
 ### Buscar cliente por id
-GET http://localhost:3000/clientes/2
+GET http://localhost:3000/clientes/1
 
 ###
 
-### Buscar cliente por nome (busca parcial)
-GET http://localhost:3000/clientes?nome=M
+### Atualizar cliente
+PUT http://localhost:3000/clientes/1
+Content-Type: application/json
+
+{
+  "nome": "Maria Silva Atualizada",
+  "cpf": "12345678901",
+  "email": "maria.atualizada@email.com",
+  "senha": "1234",
+  "telefone": "11988888888",
+  "endereco": "Rua B, 20 - Centro - SP",
+  "data_nasc": "2000-01-01",
+  "id_categoria": 1
+}
 
 ###
 
-# ─── PRODUTOS ────────────────────────────────────────────────────────────────
+### Excluir cliente
+DELETE http://localhost:3000/clientes/1
+
+###
+
+# =========================
+# PRODUTOS
+# =========================
 
 ### Criar produto
 POST http://localhost:3000/produtos
 Content-Type: application/json
 
 {
-  "nome": "Tenis azul",
-  "preco": 400,
-  "estoque": 2
+  "nome": "Tenis Azul",
+  "descricao": "Tenis casual azul",
+  "tamanho": "42",
+  "cor": "Azul",
+  "marca": "Nike",
+  "codigo_barras": "7891234567890",
+  "estoque": 10,
+  "estoque_min": 2,
+  "custo": 250,
+  "venda": 400,
+  "promocional": 350,
+  "margem": 150,
+  "id_fornecedor": 1,
+  "id_categoria_roupa": 1,
+  "status": "ativo"
 }
 
 ###
 
-### Listar todos os produtos
+### Listar produtos
 GET http://localhost:3000/produtos
 
 ###
@@ -58,54 +90,393 @@ GET http://localhost:3000/produtos/2
 
 ###
 
-### Buscar produto por nome (busca parcial)
-GET http://localhost:3000/produtos?nome=Tenis azul
-
-###
-
-# ─── VENDAS ──────────────────────────────────────────────────────────────────
-
-### Criar venda com um produto
-POST http://localhost:3000/vendas
+### Atualizar produto
+PUT http://localhost:3000/produtos/1
 Content-Type: application/json
 
 {
-  "clienteId": 1,
+  "nome": "Tenis Azul Atualizado",
+  "preco": 420,
+  "descricao": "Tenis casual azul atualizado",
+  "tamanho": "42",
+  "cor": "Azul",
+  "marca": "Nike",
+  "codigo_barras": "7891234567890",
+  "estoque": 15,
+  "custo": 260,
+  "venda": 420,
+  "margem": 160,
+  "promocional": 380,
+  "id_fornecedor": 1,
+  "id_categoria_roupa": 1,
+  "status": "ATIVO"
+}
+
+###
+
+### Excluir produto
+DELETE http://localhost:3000/produtos/1
+
+###
+
+# =========================
+# FORNECEDORES
+# =========================
+
+### Criar fornecedor
+POST http://localhost:3000/fornecedores
+Content-Type: application/json
+
+{
+  "nome": "Fornecedor A",
+  "cnpj": "12345678000199",
+  "endereco": "Rua do Fornecedor, 100",
+  "telefone": "11977777777",
+  "email": "fornecedor@email.com",
+  "cep": "01001000",
+  "categoria": "Calcados",
+  "nomefantasia": "Fornecedor Fantasia"
+}
+
+###
+
+### Listar fornecedores
+GET http://localhost:3000/fornecedores
+
+###
+
+### Buscar fornecedor por id
+GET http://localhost:3000/fornecedores/1
+
+###
+
+### Atualizar fornecedor
+PUT http://localhost:3000/fornecedores/1
+Content-Type: application/json
+
+{
+  "nome": "Fornecedor A Atualizado",
+  "cnpj": "12345678000199",
+  "endereco": "Rua do Fornecedor, 200",
+  "telefone": "11966666666",
+  "email": "fornecedor.atualizado@email.com",
+  "cep": "01001000",
+  "categoria": "Roupas",
+  "nomefantasia": "Fornecedor Fantasia Atualizado"
+}
+
+###
+
+### Excluir fornecedor
+DELETE http://localhost:3000/fornecedores/1
+
+###
+
+# =========================
+# FAQ
+# =========================
+
+### Criar FAQ
+POST http://localhost:3000/faq
+Content-Type: application/json
+
+{
+  "pergunta": "Qual o prazo de entrega?",
+  "ordem": 1,
+  "resposta": "O prazo de entrega varia de 3 a 7 dias úteis."
+}
+
+###
+
+### Listar FAQ
+GET http://localhost:3000/faq
+
+###
+
+### Atualizar FAQ
+PUT http://localhost:3000/faq/1
+Content-Type: application/json
+
+{
+  "pergunta": "Qual e o prazo de entrega?",
+  "ordem": 1,
+  "resposta": "O prazo de entrega varia de 2 a 5 dias úteis."
+}
+
+###
+
+### Excluir FAQ
+DELETE http://localhost:3000/faq/1
+
+###
+
+# =========================
+# PEDIDOS
+# =========================
+
+### Criar pedido com itens
+POST http://localhost:3000/pedidos
+Content-Type: application/json
+
+{
+  "pedido": {
+    "data_hora": "2026-04-07T20:00:00.000Z",
+    "subtotal": 800,
+    "valor_total": 800,
+    "forma_pagto": "PIX",
+    "status": "PENDENTE",
+    "id_cliente": 1
+  },
   "itens": [
-    { "produtoId": 2, "quantidade": 1 }
+    {
+      "id_produto": 1,
+      "qtd": 1
+    },
+    {
+      "id_produto": 2,
+      "qtd": 2
+    }
   ]
 }
 
 ###
 
-### Criar venda com múltiplos produtos
-POST http://localhost:3000/vendas
+### Listar pedidos
+GET http://localhost:3000/pedidos
+
+###
+
+# =========================
+# MOVIMENTACOES DE ESTOQUE
+# =========================
+
+### Listar movimentacoes
+GET http://localhost:3000/movimentacoes
+
+###
+
+### Buscar movimentacoes por produto
+GET http://localhost:3000/movimentacoes/produto/1
+
+###
+
+### Registrar entrada de estoque
+POST http://localhost:3000/estoque/entrada
 Content-Type: application/json
 
 {
-  "clienteId": 1,
-  "itens": [
-    { "produtoId": 1, "quantidade": 2 },
-    { "produtoId": 89, "quantidade": 1 }
-  ]
+  "qtd": 5,
+  "id_produto": 1,
+  "id_funcionario": 1,
+  "id_pedido": null
 }
 
 ###
 
-### Criar venda com estoque insuficiente (deve retornar erro)
-POST http://localhost:3000/vendas
+### Registrar saida de estoque
+POST http://localhost:3000/estoque/saida
 Content-Type: application/json
 
 {
-  "clienteId": 1,
-  "itens": [
-    { "produtoId": 1, "quantidade": 9999 }
-  ]
+  "qtd": 2,
+  "id_produto": 1,
+  "id_funcionario": 1,
+  "id_pedido": 1
 }
 
 ###
 
-### Listar todas as vendas
-GET http://localhost:3000/vendas
+# =========================
+# FUNCIONARIOS
+# =========================
+
+### Criar funcionario
+POST http://localhost:3000/funcionarios
+Content-Type: application/json
+
+{
+  "nome": "Joao Pereira",
+  "cargo": "Gerente",
+  "nivel_permissao": "ADMIN",
+  "cpf": "98765432100",
+  "email": "joao@email.com",
+  "data_contratacao": "2026-04-01T09:00:00.000Z",
+  "telefone": "11955555555"
+}
+
+###
+
+### Listar funcionarios
+GET http://localhost:3000/funcionarios
+
+###
+
+### Buscar funcionario por id
+GET http://localhost:3000/funcionarios/1
+
+###
+
+### Atualizar funcionario
+PUT http://localhost:3000/funcionarios/1
+Content-Type: application/json
+
+{
+  "nome": "Joao Pereira Atualizado",
+  "cargo": "Supervisor",
+  "nivel_permissao": "GERENTE",
+  "cpf": "98765432100",
+  "email": "joao.atualizado@email.com",
+  "data_contratacao": "2026-04-01T09:00:00.000Z",
+  "telefone": "11944444444"
+}
+
+###
+
+### Excluir funcionario
+DELETE http://localhost:3000/funcionarios/1
+
+###
+
+# =========================
+# CATEGORIAS DE ROUPA
+# =========================
+
+### Criar categoria de roupa
+POST http://localhost:3000/categorias-roupa
+Content-Type: application/json
+
+{
+  "nome": "Camisetas",
+  "descricao": "Categoria de camisetas e tops"
+}
+
+###
+
+### Listar categorias de roupa
+GET http://localhost:3000/categorias-roupa
+
+###
+
+### Buscar categoria de roupa por id
+GET http://localhost:3000/categorias-roupa/1
+
+###
+
+### Buscar categoria de roupa por nome
+GET http://localhost:3000/categorias-roupa/nome/Camisetas
+
+###
+
+### Atualizar categoria de roupa
+PUT http://localhost:3000/categorias-roupa/1
+Content-Type: application/json
+
+{
+  "nome": "Camisetas Premium",
+  "descricao": "Categoria atualizada de camisetas"
+}
+
+###
+
+### Excluir categoria de roupa
+DELETE http://localhost:3000/categorias-roupa/1
+
+###
+
+# =========================
+# CATEGORIAS DE CLIENTE
+# =========================
+
+### Criar categoria de cliente
+POST http://localhost:3000/categorias-cliente
+Content-Type: application/json
+
+{
+  "nome": "VIP",
+  "beneficios": "Frete gratis e desconto exclusivo",
+  "preco": 29.90
+}
+
+###
+
+### Listar categorias de cliente
+GET http://localhost:3000/categorias-cliente
+
+###
+
+### Buscar categoria de cliente por id
+GET http://localhost:3000/categorias-cliente/1
+
+###
+
+### Atualizar categoria de cliente
+PUT http://localhost:3000/categorias-cliente/1
+Content-Type: application/json
+
+{
+  "nome": "VIP Gold",
+  "beneficios": "Frete gratis, desconto exclusivo e atendimento prioritario",
+  "preco": 49.90
+}
+
+###
+
+### Excluir categoria de cliente
+DELETE http://localhost:3000/categorias-cliente/1
+
+###
+
+# =========================
+# AVALIACOES
+# =========================
+
+### Criar avaliacao
+POST http://localhost:3000/avaliacoes
+Content-Type: application/json
+
+{
+  "comentario": "Produto muito bom",
+  "nota": 4.5,
+  "id_cliente": 1,
+  "id_produto": 1
+}
+
+###
+
+### Listar avaliacoes
+GET http://localhost:3000/avaliacoes
+
+###
+
+### Buscar avaliacao por id
+GET http://localhost:3000/avaliacoes/1
+
+###
+
+### Buscar avaliacoes por cliente
+GET http://localhost:3000/avaliacoes/cliente/1
+
+###
+
+### Buscar avaliacoes por produto
+GET http://localhost:3000/avaliacoes/produto/1
+
+###
+
+### Atualizar avaliacao
+PUT http://localhost:3000/avaliacoes/1
+Content-Type: application/json
+
+{
+  "comentario": "Produto excelente, qualidade muito boa",
+  "nota": 5,
+  "id_cliente": 1,
+  "id_produto": 1
+}
+
+###
+
+### Excluir avaliacao
+DELETE http://localhost:3000/avaliacoes/1
 
 ###

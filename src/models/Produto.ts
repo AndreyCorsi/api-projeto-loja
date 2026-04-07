@@ -1,13 +1,13 @@
 export interface Produto {
     id?: number;
     nome: string;
-    preco: number;
     descricao: string;
     tamanho: string; 
     cor: string;
     marca: string;
     codigo_barras: string;
-    estoque: number;
+    qtd: number;
+    estoque_min: number;
     custo: number;
     venda: number;
     margem: number;

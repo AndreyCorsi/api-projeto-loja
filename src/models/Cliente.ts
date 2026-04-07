@@ -5,7 +5,9 @@ export interface Cliente {
     email: string;
     senha: string;
     telefone: string;
-    endereco: string;
+    rua: string;
+    num: number;
+    cidade: string;
     data_nasc: string;
-    id_categoria: string;
+    id_categoria_cliente: number;
 }

@@ -63,7 +63,7 @@ export class MovimentoestoqueRepository {
             throw new Error("Produto não encontrado.");
         }
 
-        if (produto.estoque < movimento.qtd) {
+        if (produto.qtd < movimento.qtd) {
             throw new Error("Estoque insuficiente.");
         }
 

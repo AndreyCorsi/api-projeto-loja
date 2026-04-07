@@ -21,7 +21,9 @@ export function ClienteController(): void {
             const cliente = repository.salvar(req.body);
             return res.status(201).json(cliente);
         } catch (error) {
-            return res.status(400).json({ erro: "Erro ao cadastrar cliente." });
+            return res.status(400).json({
+                erro: error instanceof Error ? error.message : "Erro ao cadastrar cliente."
+            });
         }
     });
 

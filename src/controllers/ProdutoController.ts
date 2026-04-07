@@ -20,8 +20,10 @@ export function ProdutoController(): void {
         try {
             const produto = repository.salvar(req.body);
             return res.status(201).json(produto);
-        } catch {
-            return res.status(400).json({ erro: "Erro ao cadastrar produto." });
+        } catch (error) {
+            return res.status(400).json({
+                erro: error instanceof Error ? error.message : "Erro ao cadastrar produto."
+            });
         }
     });
 
